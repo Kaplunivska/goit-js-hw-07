@@ -4,7 +4,7 @@ import { galleryItems } from './gallery-items.js';
 
 const galleryRef = document.querySelector('div.gallery');
 const modal = basicLightbox.create(`
-<div class = "modal">
+<div class="modal">
 </div>
 `);
 
@@ -30,16 +30,18 @@ galleryRef.innerHTML = galleryMarkup;
 
 // Click and open select image
 
-function galleryClickHandler(e) {
-    e.preventDefault();
+function galleryClickHandler(evt) {
+    evt.preventDefault();
 
-    const { target } = e;
+    const { target } = evt;
     if (target.nodeName !== 'IMG') return;
 
     modal.show((modal) => {
-    const imgEl = modal.element().querySelector('.modal');
+    const imgElem = modal.element().querySelector('.modal');
 
-    imgEl.innerHTML = `<img src="${target.dataset.sourse}" alt="${target.alt}" width="1000">`;
+    imgElem.innerHTML = `<img src="${target.dataset.source}" alt="${target.alt}" width="1000">`;
+    
+    
     addKeyEvent();
 });   
 }
@@ -54,13 +56,11 @@ function removeKeyEvent() {
 
 // Closing from the keyboard
 
-console.log(galleryItems);
-
-function keyDownHandler(e) {
-    if (e.code !== 'Escape') return;
+function keyDownHandler(evt) {
+    if (evt.code !== 'Escape') return;
   
     modal.close(removeKeyEvent);
-  }
+}
   
 
 
